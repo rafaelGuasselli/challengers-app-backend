@@ -1,13 +1,13 @@
 package builder;
 
 import model.User;
-import parsers.AuthParser;
+import parsers.AbstractAuthParser;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public final class CurrentUserBuilder {
-	private AuthParser.AuthContext authContext;
+	private AbstractAuthParser.AuthContext authContext;
 
 	private CurrentUserBuilder() {
 	}
@@ -16,13 +16,13 @@ public final class CurrentUserBuilder {
 		return new CurrentUserBuilder();
 	}
 
-	public static User buildFromAuthContext(AuthParser.AuthContext authContext) {
+	public static User buildFromAuthContext(AbstractAuthParser.AuthContext authContext) {
 		return newBuilder()
 				.withAuthContext(authContext)
 				.build();
 	}
 
-	public CurrentUserBuilder withAuthContext(AuthParser.AuthContext authContext) {
+	public CurrentUserBuilder withAuthContext(AbstractAuthParser.AuthContext authContext) {
 		this.authContext = authContext;
 		return this;
 	}
@@ -44,7 +44,7 @@ public final class CurrentUserBuilder {
 		return user;
 	}
 
-	private static String resolveName(AuthParser.AuthContext context) {
+	private static String resolveName(AbstractAuthParser.AuthContext context) {
 		String name = resolveClaim(context, "name");
 		if (isPresent(name)) {
 			return name;
@@ -60,7 +60,7 @@ public final class CurrentUserBuilder {
 		return context.getSub();
 	}
 
-	private static String resolveClaim(AuthParser.AuthContext context, String key) {
+	private static String resolveClaim(AbstractAuthParser.AuthContext context, String key) {
 		if (context == null) {
 			return null;
 		}

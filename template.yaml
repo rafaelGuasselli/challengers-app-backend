@@ -126,6 +126,62 @@ Resources:
         - AttributeName: id
           KeyType: HASH
 
+  GroupCrudFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: challangers-app
+      Handler: lambda.GroupCrudLambda::handleRequest
+      Runtime: java17
+      MemorySize: 1024
+      Timeout: 30
+      Environment:
+        Variables:
+          GROUPS_TABLE: !Ref GroupsTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref GroupsTable
+      Events:
+        ListGroups:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /groups
+            Method: GET
+            Auth:
+              Authorizer: CognitoAuthorizer
+        CreateGroup:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /groups
+            Method: POST
+            Auth:
+              Authorizer: CognitoAuthorizer
+        GetGroup:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /groups/{id}
+            Method: GET
+            Auth:
+              Authorizer: CognitoAuthorizer
+        UpdateGroup:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /groups/{id}
+            Method: PUT
+            Auth:
+              Authorizer: CognitoAuthorizer
+        DeleteGroup:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /groups/{id}
+            Method: DELETE
+            Auth:
+              Authorizer: CognitoAuthorizer
+
 
 
 Outputs:
