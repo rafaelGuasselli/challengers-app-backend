@@ -14,6 +14,7 @@ public class Challange {
 	private String name;
 	private String picture;
 	private int score;
+	private String groupId;
 
 	public ArrayList<ChallangeIteration> getChallangeIterations() {
 		return challangeIterations;
@@ -93,5 +94,13 @@ public class Challange {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 }

@@ -54,6 +54,78 @@ Resources:
               audience:
                 - !Ref UserPoolClient
 
+  UserProfilesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-user-profiles
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  GroupsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-groups
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  GroupJoinSolicitationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-group-join-solicitations
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  ChallangesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-challanges
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  ChallangeIterationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-challange-iterations
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
+  ChallangeValidationRequestsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${AWS::StackName}-challange-validation-requests
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+
 
 
 Outputs:
@@ -69,3 +141,18 @@ Outputs:
   UserProfilesTableName:
     Description: DynamoDB table that stores basic user profile info
     Value: !Ref UserProfilesTable
+  GroupsTableName:
+    Description: DynamoDB table storing groups
+    Value: !Ref GroupsTable
+  GroupJoinSolicitationsTableName:
+    Description: DynamoDB table storing group join solicitations
+    Value: !Ref GroupJoinSolicitationsTable
+  ChallangesTableName:
+    Description: DynamoDB table storing challanges
+    Value: !Ref ChallangesTable
+  ChallangeIterationsTableName:
+    Description: DynamoDB table storing challange iterations
+    Value: !Ref ChallangeIterationsTable
+  ChallangeValidationRequestsTableName:
+    Description: DynamoDB table storing challange validation requests
+    Value: !Ref ChallangeValidationRequestsTable

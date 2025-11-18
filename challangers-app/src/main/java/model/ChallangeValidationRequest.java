@@ -6,6 +6,7 @@ public class ChallangeValidationRequest {
 	private String picture;
 	private int score;
 	private User user;
+	private String challangeId;
 
 	public String getId() {
 		return id;
@@ -45,5 +46,13 @@ public class ChallangeValidationRequest {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getChallangeId() {
+		return challangeId;
+	}
+
+	public void setChallangeId(String challangeId) {
+		this.challangeId = challangeId;
 	}
 }

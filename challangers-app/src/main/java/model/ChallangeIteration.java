@@ -6,6 +6,7 @@ public class ChallangeIteration {
 	private String picture;
 	private int score;
 	private User user;
+	private String challangeId;
 
 	public String getDescription() {
 		return description;
@@ -45,5 +46,13 @@ public class ChallangeIteration {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getChallangeId() {
+		return challangeId;
+	}
+
+	public void setChallangeId(String challangeId) {
+		this.challangeId = challangeId;
 	}
 }
