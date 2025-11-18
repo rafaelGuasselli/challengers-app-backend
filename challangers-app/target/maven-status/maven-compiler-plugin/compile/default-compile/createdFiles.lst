@@ -1,0 +1,9 @@
+com/challengers/app/ProfileCrudHandler$BadRequestException.class
+com/parsers/AuthParser.class
+com/challengers/app/ProfileCrudHandler.class
+com/model/UserProfile.class
+com/challengers/app/HelloHandler.class
+com/model/UserProfile$Builder.class
+com/parsers/AuthParser$AuthContext.class
+com/challengers/app/ProfileCrudHandler$ProfilePayload.class
+com/challengers/app/ProfileCrudHandler$NotFoundException.class
