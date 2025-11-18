@@ -4,6 +4,7 @@ import model.Challange;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,11 +28,19 @@ public class ChallangeRepository extends BaseCrudRepository<Challange> {
 		if (entity.getGroupId() != null) {
 			attributes.put("groupId", AttributeValue.builder().s(entity.getGroupId()).build());
 		}
-		if (entity.getOwnerUserId() != null) {
-			attributes.put("ownerUserId", AttributeValue.builder().s(entity.getOwnerUserId()).build());
-		}
 		return attributes;
 	}
+
+	public List<Challange> listByGroups(ArrayList<String> groupIds) {
+		List<Challange> result = new ArrayList<Challange>();
+		for (String id: groupIds) {
+			List<Challange> temp = this.listByGroup(id);
+			result.addAll(temp);
+		}
+
+		return result;
+	}
+
 
 	public List<Challange> listByGroup(String groupId) {
 		if (groupId == null || groupId.isBlank()) {
@@ -41,15 +50,5 @@ public class ChallangeRepository extends BaseCrudRepository<Challange> {
 				":groupId", AttributeValue.builder().s(groupId).build()
 		);
 		return scanWithFilter("groupId = :groupId", values);
-	}
-
-	public List<Challange> listByUser(String ownerUserId) {
-		if (ownerUserId == null || ownerUserId.isBlank()) {
-			return Collections.emptyList();
-		}
-		Map<String, AttributeValue> values = Collections.singletonMap(
-				":ownerUserId", AttributeValue.builder().s(ownerUserId).build()
-		);
-		return scanWithFilter("ownerUserId = :ownerUserId", values);
 	}
 }
