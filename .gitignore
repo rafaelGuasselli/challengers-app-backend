@@ -17,3 +17,4 @@ mobile/ios/
 mobile/web-build/
 
 .env
+target
